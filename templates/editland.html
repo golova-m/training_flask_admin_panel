@@ -15,7 +15,11 @@
 
 				</button>
 			{% endfor %}
-			<button>Добавить</button>
+			<button class="nav-link" id="v-pills-add-tab" data-bs-toggle="pill"
+				data-bs-target="#v-pills-add" type="button" role="tab"
+				aria-controls="v-pills-{{ j_key }}" aria-selected="false">
+				Добавить
+			</button>
 		</div>
 
 		<div class="tab-content" id="v-pills-tabContent">
@@ -36,9 +40,23 @@
 						<br><br><br>
 						</form>
 					{% endfor %}
-					<form method="post" action="add_content" enctype="multipart/form-data">
-						<button type="submit">Добавить</button>
-					</form>
+
+					<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+						Добавить
+					</button>
+     				<div class="collapse" id="collapseExample">
+						<div class="card card-body">
+							<form method="post" action="update_content" enctype="multipart/form-data">
+								<h3><input type="text" name="short_title"></h3>
+								<p><input type="text" name="altimg"></p>
+								<input type="file" name="img">
+								<p><input type="text" name="title"></p>
+								<p><textarea name="contenttext"></textarea></p>
+								<input type="hidden" name="id">
+								<button type="submit" class="btn btn-primary">Сохранить изменения</button>
+							</form>
+						</div>
+					</div>
 				</div>
 			{% endfor %}
 		</div>
