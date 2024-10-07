@@ -161,6 +161,11 @@ def update_content():
     return redirect(url_for('admin_panel'))
 
 
+@app.route('/add_content', methods=['POST'])
+def add_content():
+    print('add content')
+    return redirect(url_for('admin_panel'))
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
