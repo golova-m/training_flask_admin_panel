@@ -37,23 +37,25 @@
 							<input type="hidden" name="id" value="{{ item.id }}">
 							<button type="submit" class="btn btn-primary">Сохранить изменения</button>
                             <input type="hidden" name="user_id" value="{{ session['user_id'] }}">
-						<br><br><br>
+							<br><br><br>
 						</form>
 					{% endfor %}
 
-					<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+					<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAdd" aria-expanded="false" aria-controls="collapseExample">
 						Добавить
 					</button>
-     				<div class="collapse" id="collapseExample">
+     				<div class="collapse" id="collapseAdd">
 						<div class="card card-body">
-							<form method="post" action="update_content" enctype="multipart/form-data">
-								<h3><input type="text" name="short_title"></h3>
-								<p><input type="text" name="altimg"></p>
+							<form method="post" action="add_content" enctype="multipart/form-data">
+							<p><input type="text" name="short_title">short_title</p>
+							<p><input type="text" name="altimg">altimg</p>
 								<input type="file" name="img">
-								<p><input type="text" name="title"></p>
-								<p><textarea name="contenttext"></textarea></p>
+								<p><input type="text" name="title">title</p>
+								<p><textarea name="contenttext"></textarea>contenttext</p>
 								<input type="hidden" name="id">
 								<button type="submit" class="btn btn-primary">Сохранить изменения</button>
+								<input type="hidden" name="user_id" value="{{ session['user_id'] }}">
+								<input type="hidden" name="idblock" value="{{ j_key }}">
 							</form>
 						</div>
 					</div>

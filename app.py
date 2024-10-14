@@ -1,5 +1,6 @@
 import os
 import datetime
+import random
 from werkzeug.utils import secure_filename
 import hashlib
 from flask import Flask, render_template, redirect, url_for, request, session
@@ -163,7 +164,36 @@ def update_content():
 
 @app.route('/add_content', methods=['POST'])
 def add_content():
-    print('add content')
+    content_id = random.randint(1, 1000)
+    idblock = request.form['idblock']
+    altimg = request.form['altimg']
+    short_title = request.form['short_title']
+    title = request.form['title']
+    contenttext = request.form['contenttext']
+    author = request.form['user_id']
+    timestampdata = generation_timestampdata()
+    print('timestampdata', timestampdata)
+    print(idblock)
+    # Обработка загруженного файла
+    file = request.files['img']
+
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        save_path = os.path.join(path_to_save_images, filename)
+        imgpath = "/static/imgs/"+filename
+        file.save(save_path)
+    
+    # Добавление данных в базе
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    if file:
+        cursor.execute('INSERT INTO content (short_title, img, title, altimg, contenttext, author, timestampdata, idblock, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', (short_title, imgpath, title, altimg, contenttext, author, timestampdata, idblock, content_id))
+    else:
+        cursor.execute('INSERT INTO content (short_title, title, altimg, contenttext, author, timestampdata, idblock, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', (short_title, title, altimg, contenttext, author, timestampdata, idblock, content_id))
+
+    conn.commit()
+    conn.close()
     return redirect(url_for('admin_panel'))
 
 def allowed_file(filename):
