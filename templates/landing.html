@@ -108,6 +108,18 @@
     </div>
 </section>
 
+<section id="post" class="container mt-4">
+    <div class="row align-items-center">
+        {% for item in json_data['post'] %}
+        <div class="col-md-6">
+            <img src="{{ item.img }}" class="featurette-image img-fluid" alt="{{ item.altimg }}">
+            <h2 class="featurette-heading">{{ item.title }}</h2>
+            <p class="lead">{{ item.contenttext }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
 <!-- Horizontal Card with image  and text right -->
 {% for count in range(1, 10) %}  <!-- Предположим, что у нас не более 10 featurette -->
     {% set feature_key = 'featurette' ~ count %}
